@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>表单填写与审批::加载中</title>
+    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv=X-UA-Compatible content="IE=Edge">
+    <meta name=theme-color content=#039be5>
+    <meta name=format-detection content="telephone=no">
+    <style>@font-face {
+      font-family: "icomoon";
+      src: url(icon.ttf) format("truetype");
+      font-weight: normal;
+      font-style: normal
+    }
+
+    i {
+      font-family: "icomoon" !important;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale
+    }
+
+    .i-icon-menu:before {
+      content: ""
+    }
+
+    .i-icon-more-vert:before {
+      content: ""
+    }
+
+    .infoplus_control {
+      font-family: SimSun, "Songti SC", "Microsoft YaHei", SimHei, "Heiti SC", sans-serif
+    }
+
+    .infoplus_iframeControlContainer {
+      position: relative
+    }
+
+    * {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box
+    }
+
+    html {
+      font-size: 16px
+    }
+
+    body, div, p, h1, ul, li, table, img {
+      margin: 0;
+      padding: 0;
+      border: none
+    }
+
+    body {
+      font-size: 14px !important;
+      font-family: SimSun, "Songti SC", "Microsoft YaHei", SimHei, "Heiti SC", sans-serif !important;
+      background-color: #E5E5E5 !important;
+      line-height: normal;
+      margin: 0 !important;
+      position: relative
+    }
+
+    button {
+      font-family: SimSun, "Songti SC", "Microsoft YaHei", SimHei, "Heiti SC", sans-serif
+    }
+
+    td {
+      text-align: left
+    }
+
+    tbody {
+      border-color: inherit;
+      display: table-row-group;
+      vertical-align: middle
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    #div_render_container {
+      position: relative;
+      text-align: center
+    }
+
+    #renderContent_holder {
+      padding-bottom: 15px;
+      text-align: center
+    }
+
+    #header_holder {
+      left: 0;
+      right: 0;
+      position: fixed;
+      z-index: 1;
+      min-width: 310px
+    }
+
+    #title_holder {
+      color: white
+    }
+
+    #command_holder {
+      width: 100%;
+      background-color: #f5f5f5;
+      -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16);
+      -moz-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16);
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16)
+    }
+
+    .div_content {
+      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+      margin: auto
+    }
+
+    #form_holder {
+      height: auto;
+      position: relative
+    }
+
+    #master_footer {
+      padding-bottom: 2px;
+      text-align: center
+    }
+
+    #render_holder {
+      display: inline-block;
+      text-align: center;
+      position: relative
+    }
+
+    .round-corner {
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      padding: 4px 0;
+      border-collapse: separate
+    }
+
+    .color_o1 {
+      color: #FAAC18
+    }
+
+    .color_b2 {
+      color: #0560A6
+    }
+
+    div.form_remark_holder {
+      margin: auto;
+      background-color: white;
+      color: #0560A6
+    }
+
+    div.form_remark_holder.shadow {
+      -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12)
+    }
+
+    div.form_remark_holder ul {
+      background-color: #ffffff;
+      list-style: none;
+      text-align: center;
+      padding: 5px 20px
+    }
+
+    div.form_remark_holder ul li {
+      font-size: 12px;
+      text-align: left;
+      padding-top: 8px;
+      padding-bottom: 8px
+    }
+
+    div.form_remark_title {
+      overflow: hidden
+    }
+
+    div.form_remark_title:before {
+      content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAoJJREFUeNosUktrFEEQrq7unp1ZdpcNCTEPIoRs8EH0EEiU4CUGDxLw4JKzOSTiIYIoIv4GEbx5yCEePYwHhYCHSBA8GU8i+EgiicHHbgwmu8nOs7usWa2e6Wm6v6qvvq9H1Ig2tuD5WpDEJCQaY6RFpVSapohoJSVJorV0lZ4agZGTWn3ehOXl5V11BoWTWsNQNCIIgmyBSAqISErRtLS6+kGIi7Lr3O36Ud5gBwknSQUZ6x29GT3V0VsOf++sRXpQoGch14oohOKPA0dFUSSlNAC8ACBrkvv3qgBgAaanT9958NXzkEA4jmNiwxhsGn1oHe4hJ1XS/DlzaaAXbA+YfrD9mFy50GNadQVZk7Eq7Mcsy9owDP+p5OjsBENGgGASKWSplGfR7AQrabcASFHiAIatWhDtSq1evmpYoWNCfhLAldffSGBi9kyyryyYIPrPIISI45jLFItF31/lWmEIS0svhoaO5/P5ZrPJMGZgmKIkgDRM4+BYgRbvTgiEp+8mr95c5LP5+bkboyAuV64/fFv7cyB0IQ0RW60W+91oNObmJkTWOZwfg1wux4XHx4DzOWZnx1k0i2ESlVrNaJd+Vbr4KOW3z6hHtybZ6wG2FrOd4S4F4fYhFVFJxQLYhEKhYAna3gDzVCoD0A7i0b4T13UjgszPVhDw52PNfvoO1KccBEQwNktDwVDNFO83YbvugXNQLpcVU7P9pVJpYeHx2UHd3Vl2ncw6Fs3MgGprp75Rk06pzyrFm2Lx2brv+3VnmIxnjgz/ArumwffIOVwrH0qtdYyx46bd8Xq1WhV7RL7/5cnKehRIF1z2IS1lnKIdXoA8pyrlhGtTlZmZE38FGACxemPwwLwFJQAAAABJRU5ErkJggg==);
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      position: relative;
+      top: 2px
+    }
+
+    #div_loader {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #e5e5e5
+    }
+
+    #help_content {
+      position: fixed;
+      z-index: 10001;
+      cursor: pointer
+    }
+
+    /*!
+     * ClockPicker v0.0.7 for jQuery (http://weareoutman.github.io/clockpicker/)
+     * Copyright 2014 Wang Shenwei.
+     * Licensed under MIT (https://github.com/weareoutman/clockpicker/blob/gh-pages/LICENSE)
+     *
+     * Bootstrap v3.1.1 (http://getbootstrap.com)
+     * Copyright 2011-2014 Twitter, Inc.
+     * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+     */
+    body {
+      overflow-x: hidden;
+      background-color: #f3f3f3 !important
+    }
+
+    .div_content {
+      background-color: #f3f3f3
+    }
+
+    #master_footer {
+      background-color: #f3f3f3
+    }
+
+    div.infoplus_view_wrap_inner {
+      overflow-x: auto;
+      position: relative;
+      top: 10px;
+      -webkit-overflow-scrolling: touch
+    }
+
+    @media screen and (-ms-high-contrast: active),(-ms-high-contrast: none) {
+      div.infoplus_view_wrap_inner {
+        top: 17px
+      }
+    }
+
+    div.infoplus_view_wrap_outer {
+      overflow: hidden;
+      background-color: white;
+      margin-bottom: 10px
+    }
+
+    div.form_remark_title {
+      font-size: 0.9rem
+    }
+
+    div.form_remark_holder.shadow {
+      -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16), 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16), 0 1px 4px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.16), 0 1px 4px 0 rgba(0, 0, 0, 0.12)
+    }
+
+    #title_holder {
+      height: 46px
+    }
+
+    #renderContent_holder {
+      padding-top: 105px;
+      background-color: #f3f3f3
+    }
+
+    div.infoplus_view {
+      background-color: white;
+      margin-bottom: 15px;
+      display: block;
+      padding: 10px;
+      position: relative
+    }
+
+    #title_holder.todo {
+      background-color: #039be5
+    }
+
+    #title_icon {
+      display: inline-block;
+      float: left;
+      width: 36px;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+      cursor: pointer
+    }
+
+    #form_command_bar {
+      background-color: #f5f5f5;
+      padding-right: 3px;
+      min-width: 280px;
+      position: relative
+    }
+
+    #command_bar_title_icon {
+      float: left;
+      list-style: none;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      z-index: 1;
+      position: relative
+    }
+
+    #command_bar_title_icon.todo {
+      background-color: #039be5
+    }
+
+    #form_command_bar li.no_action {
+      margin: 4px 2px;
+      padding: 4px 0 0 5px;
+      float: left;
+      position: relative;
+      text-align: left;
+      list-style: none;
+      color: #009966;
+      font-size: 14px;
+      font-weight: bold
+    }
+
+    #title_content {
+      padding-left: 5px;
+      font-size: 14px;
+      color: white;
+      float: left;
+      text-align: left;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    #title_description {
+      padding-right: 9px;
+      font-size: 12px;
+      color: #eee;
+      float: right
+    }
+
+    #title_description_short {
+      padding-right: 9px;
+      font-size: 12px;
+      color: #eee;
+      float: right
+    }
+
+    #nav_menu {
+      position: fixed;
+      height: 100%;
+      width: 158px;
+      left: 0;
+      background-color: #FFFFFF;
+      -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.18);
+      -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.18);
+      overflow-y: auto;
+      z-index: 1;
+      padding-top: 8px
+    }
+
+    li.tool_button {
+      position: relative;
+      text-align: center;
+      list-style: none;
+      float: right
+    }
+
+    a.tool_button {
+      display: inline-block;
+      margin-bottom: 0;
+      text-align: center;
+      vertical-align: middle;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      color: #4a4a4a
+    }
+
+    a.tool_button:hover {
+      display: inline-block;
+      *display: inline;
+      padding: 3px;
+      margin-bottom: 0;
+      *margin-left: .3em;
+      line-height: 18px;
+      *line-height: 18px;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      border: 1px solid #c5c5c5;
+      text-decoration: none;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      background-color: #F8F8F8;
+      *background-color: #F8F8F8;
+      color: #4a4a4a
+    }
+
+    #div_footer_copy_content {
+      padding: 10px 0 10px 0;
+      text-align: center;
+      color: #666666
+    }
+
+    #div_footer_copy_content span.copyright {
+      font-family: "Microsoft YaHei", PingFangSC-Regular, SimHei, "Heiti SC", sans-serif
+    }
+
+    div.infoplus_view_wrap_outer {
+      margin: 0
+    }
+
+    #form_holder {
+      -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+      -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+      margin-bottom: 10px;
+      background-color: white
+    }
+
+    div.infoplus_view_wrap_outer:not(:first-child):not(:nth-last-of-type(2)) {
+      margin-bottom: 10px
+    }
+
+    li.tool_button {
+      margin: 2px 2px
+    }
+
+    a.tool_button {
+      line-height: 34px;
+      padding: 3px 5px;
+      font-size: 1.6rem
+    }
+
+    a.tool_button:hover {
+      line-height: 34px;
+      padding: 3px 5px;
+      border: 1px solid transparent;
+      background-color: transparent
+    }
+
+    #title_icon {
+      height: 46px;
+      line-height: 46px
+    }
+
+    #command_holder {
+      height: 48px
+    }
+
+    #form_command_bar {
+      height: 48px
+    }
+
+    #command_bar_title_icon {
+      width: 42px;
+      height: 48px;
+      line-height: 48px
+    }
+
+    #form_command_bar li.no_action {
+      height: 38px;
+      line-height: 32px
+    }
+
+    #title_content {
+      line-height: 46px
+    }
+
+    #title_description {
+      line-height: 45px
+    }
+
+    #title_description_short {
+      line-height: 45px
+    }
+
+    BODY {
+      margin-left: 21px;
+      background-position: 21px 0px
+    }
+
+    BODY {
+      margin-right: 21px
+    }
+
+    TD {
+      BORDER-TOP-COLOR: #d8d8d8;
+      BORDER-LEFT-COLOR: #d8d8d8;
+      BORDER-BOTTOM-COLOR: #d8d8d8;
+      BORDER-RIGHT-COLOR: #d8d8d8
+    }
+
+    P {
+      FONT-SIZE: 11pt;
+      MARGIN-TOP: 0px;
+      COLOR: #354d3f
+    }
+
+    H1 {
+      FONT-SIZE: 24pt;
+      MARGIN-BOTTOM: 0px;
+      MARGIN-TOP: 0px;
+      FONT-WEIGHT: normal;
+      COLOR: #354d3f
+    }
+
+    TABLE {
+      FONT-SIZE: 10pt;
+      FONT-FAMILY: Microsoft YaHei;
+      TEXT-TRANSFORM: none;
+      FONT-WEIGHT: normal;
+      COLOR: black;
+      FONT-STYLE: normal
+    }
+
+    BODY {
+      FONT-SIZE: 10pt;
+      FONT-FAMILY: Microsoft YaHei
+    }
+
+    BODY {
+      color: windowtext;
+      background-color: window
+    }
+
+    TABLE {
+      BORDER-TOP: medium none;
+      BORDER-RIGHT: medium none;
+      BORDER-BOTTOM: medium none;
+      BORDER-LEFT: medium none
+    }
+
+    BODY {
+      COLOR: black
+    }
+
+    TD.xdTitleCell {
+      TEXT-ALIGN: center
+    }
+
+    TD.xdTableContentCell {
+      BACKGROUND-COLOR: #ffffff
+    }</style>
+    <style>.sf-hidden {
+      display: none !important
+    }</style>
+    <style>img[src="data:,"], source[src="data:,"] {
+      display: none !important
+    }</style>
+
+    <style>
+      #command_holder li.command_button {
+        height: 38px;
+      }
+
+      #command_holder li.command_button {
+        height: 26px;
+        margin: 4px 2px 4px 6px;
+        float: left;
+        position: relative;
+        text-align: left;
+        list-style: none;
+      }
+
+      #command_holder .command_button_content {
+        font-weight: bold;
+        min-width: 118px;
+        display: inline-block;
+        *display: inline;
+        padding: 3px 8px;
+        margin-bottom: 0;
+        *margin-left: .3em;
+        font-size: 14px;
+        line-height: 20px;
+        *line-height: 20px;
+        color: #009966;
+        text-align: center;
+        text-shadow: 0 1px 1px rgb(255 255 255 / 75%);
+        vertical-align: middle;
+        cursor: pointer;
+        background-color: #FFFFFF;
+        *background-color: #FFFFFF;
+        border: 1px solid #FFFFFF;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        *zoom: 1;
+        -webkit-box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 1px 2px rgb(0 0 0 / 5%);
+        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+        border-color: #c5c5c5;
+        border-color: rgba(0, 0, 0, 0.08) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.15);
+      }
+
+      #command_holder .command_button_content {
+        width: 100px;
+        min-width: 100px;
+        padding: 3px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 32px;
+      }
+
+      #command_holder li.command_button ~ li.command_button {
+        margin: 4px 2px;
+      }
+
+      #command_holder .command_button_content.kill {
+        color: #00B0FF;
+      }
+    </style>
+</head>
+<body>
+<div id=help_content></div>
+<div id=div_loader style=display:none>
+
+</div>
+<div id=form_do_action_dialog style=display:none>
+
+
+</div>
+<div id=div_render_container style=display:block>
+    <form id=renderForm>
+        <div id=div_content class=div_content>
+            <div id=header_holder style=top:0px>
+                <div id=title_holder class=todo>
+                    <div id=title_icon class=title_icon><i class=i-icon-menu></i></div>
+                    <div id=title_content style=max-width:253px>
+                        <nobr class="title"></nobr>
+                    </div>
+                    <div>
+                        <div id=title_description>流水号:<span class="water"></span></div>
+                        <div id=title_description_short style=display:none>流水号:<span class="water"></span></div>
+                    </div>
+                </div>
+
+                <div id=command_holder>
+                    <div class="clear sf-hidden"></div>
+                    <div id=command_bar_title_icon class="title_icon todo" style=display:none></div>
+                    <ul id=form_command_bar>
+                        <li class="command_button jx" style="display: none"><a class="command_button_content">
+                            <nobr>上传核酸报告</nobr>
+                        </a></li>
+                        <li class="command_button kill jx" style="display: none"><a class="command_button_content kill"
+                                                                                    name="infoplus_action_2776_kill"
+                                                                                    id="infoplus_action_2776_kill">
+                            <nobr>终止</nobr>
+                        </a></li>
+                        <li class=no_action id="noAction" style="display: none">您无需任何操作</li>
+                        <li class=tool_button><a id=FormCommandMore class=tool_button href=#><i
+                            class=i-icon-more-vert></i></a>
+                    </ul>
+                </div>
+            </div>
+            <div id=renderContent_holder>
+                <div id=nav_menu style=display:none;top:94px></div>
+
+
+                <div id=render_holder>
+                    <div id=form_holder style=width:394px;display:block>
+                        <div class=infoplus_view_wrap_outer>
+                            <div class=infoplus_view_wrap_inner>
+                                <div id=infoplus_view_2450_0 class=infoplus_view>
+                                    <div align=center></div>
+                                    <div align=center></div>
+                                    <div align=center>
+                                        <table
+                                            style=BORDER-TOP-STYLE:none;WORD-WRAP:break-word;BORDER-LEFT-STYLE:none;WIDTH:360px;BORDER-COLLAPSE:collapse;TABLE-LAYOUT:fixed;BORDER-BOTTOM-STYLE:none;BORDER-RIGHT-STYLE:none
+                                            class=xdFormLayout>
+                                            <colgroup>
+                                                <col width=360 style=WIDTH:360px>
+                                            <tbody>
+                                            <tr class=xdTitleRow>
+                                                <td class=xdTitleCell
+                                                    style="BORDER-TOP:#000000 1pt;BORDER-RIGHT:#808080 6pt;VERTICAL-ALIGN:top;BORDER-BOTTOM:#808080 6pt;PADDING-BOTTOM:10px;PADDING-TOP:10px;PADDING-LEFT:10px;BORDER-LEFT:#808080 6pt;PADDING-RIGHT:10px;BACKGROUND-COLOR:#ffffff">
+                                                    <h1 align=left><img border=0 src="logo.png" id="logo"
+                                                                        style=HEIGHT:67px;WIDTH:223px></h1>
+                                            <tr class=xdTableContentRow>
+                                                <td class=xdTableContentCell
+                                                    style="BORDER-TOP:#808080 6pt;BORDER-RIGHT:#bfbfbf 1pt;VERTICAL-ALIGN:top;BORDER-BOTTOM:#bfbfbf 1pt;PADDING-BOTTOM:0px;PADDING-TOP:0px;PADDING-LEFT:0px;BORDER-LEFT:#bfbfbf 1pt;PADDING-RIGHT:0px">
+                                                    <div align=left>
+                                                        <table border=1 bordercolor=buttontext
+                                                               style="WORD-WRAP:break-word;BORDER-TOP:medium none;BORDER-RIGHT:medium none;WIDTH:358px;BORDER-COLLAPSE:collapse;TABLE-LAYOUT:fixed;BORDER-BOTTOM:medium none;BORDER-LEFT:medium none"
+                                                               class=xdLayout>
+                                                            <colgroup>
+                                                                <col width=358 style=WIDTH:358px>
+                                                            <tbody>
+                                                            <tr>
+                                                                <td style="BORDER-TOP:#d8d8d8 1pt solid;BORDER-RIGHT:#d8d8d8 1pt solid;VERTICAL-ALIGN:middle;BORDER-BOTTOM:#d8d8d8 1pt solid;PADDING-BOTTOM:10px;PADDING-TOP:10px;PADDING-LEFT:10px;BORDER-LEFT:#d8d8d8 1pt solid;PADDING-RIGHT:10px;BACKGROUND-COLOR:#ffffff">
+                                                                    <div><font size=4><strong>
+                                                                        <div class=xdlabel></div>
+                                                                    </strong></font></div>
+                                                                    <font size=4><strong>
+                                                                        <div align=left>
+                                                                            <div
+                                                                                class="infoplus_iframeControlContainer infoplus_readonly"
+                                                                                id=iframe_1d6997c5-c2e3-4407-a82f-69d0157d63ce_Container>
+
+
+                                                                                <iframe scrolling=auto
+                                                                                        style=HEIGHT:600px;WIDTH:100%
+                                                                                        class="infoplus_control infoplus_iframeControl infoplus_readonly"
+                                                                                        title id="qrcode"
+                                                                                        sandbox="allow-popups allow-top-navigation allow-top-navigation-by-user-activation allow-scripts allow-same-origin"></iframe>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </strong></font>
+                                                        </table>
+                                                    </div>
+                                        </table>
+                                    </div>
+                                    <div align=center></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id=variables_container></div>
+                    </div>
+                </div>
+
+                <div id=form_remark_holder class="form_remark_holder shadow round-corner" align=center
+                     style=width:394px;display:block>
+                    <ul>
+                        <li class=remark_item style=display:block;border-bottom:none>
+                            <div class=form_remark_title><span class=color_b2><span class=color_o1><b>您(<span
+                                id="name"></span>)</b></span> 正在填写/办理<b
+                                id="banli"></b></span>
+                            </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div id=master_footer>
+        <div id=div_footer_copy_containers>
+            <div style=height:1px;background-color:#999999></div>
+            <div style=height:1px;background-color:#FFFFFF></div>
+            <div id=div_footer_copy_content><span class=copyright>©</span> 2009 - 2021. 南京信息工程大学(nuist.edu.cn), All
+                rights reserved. Version 20211117-095344
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+    function getRandomIntInclusive(min, max) {
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        return Math.floor(Math.random() * (max - min + 1)) + min //含最大值，含最小值
+    }
+
+    const params = new URLSearchParams(location.search)
+
+    const isJx = params.get('isJx')
+
+    $('#qrcode').attr('src', 'qrcode.html' + location.search)
+    $('.water').text(getRandomIntInclusive(2333333, 2666666))
+    $('#name').text(params.get('name'))
+    if (isJx) {
+        $('.title').text('查看销假二维码:查看进校二维码')
+        $('#banli').text('查看进校二维码')
+        $('.jx').show()
+        document.title = '查看进校二维码 - 查看销假二维码'
+        $('#logo').attr('style', 'HEIGHT: 57px; WIDTH: 221px')
+    }
+    else {
+        $('.title').text('查看出校二维码:查看出校二维码')
+        $('#banli').text('查看出校二维码')
+        $('#noAction').show()
+        document.title = '查看出校二维码 - 查看出校二维码'
+    }
+</script>

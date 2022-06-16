@@ -1,0 +1,241 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>销假进校二维码</title>
+    <script src="https://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!--<script type="text/javascript" src="./jkm/js/jquery.qrcode.min.js?v=1"></script>
+-->
+    <script type="text/javascript" src="https://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+
+  }
+
+  body:before {
+    content: ' ';
+    position: fixed;
+
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .phone_login_nav_1 dd {
+    font-size: 26px;
+    color: #004287;
+    line-height: 60px;
+  }
+
+  body {
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+    font-family: "Microsoft YaHei";
+  }
+
+  ol, ul, li {
+    padding-left: 0em;
+    list-style: none
+  }
+
+  h2, h3, h4, ul, li, p {
+    padding: 0;
+    margin: 0;
+  }
+
+  input {
+    outline: none;
+  }
+
+  html {
+    padding: 0;
+    margin: 0;
+  }
+
+  html, body {
+    height: 100%
+  }
+
+  .banner img {
+    width: 60%;
+    height: auto;
+
+  }
+
+  .content-box {
+    width: 90%;
+    height: 800px;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(141, 141, 141, 0.4);
+    background: #fff;
+    margin: 0 auto;
+    position: relative;
+    top: -10px;
+  }
+
+  .top-title h3 {
+    font-size: 1.3rem;
+    color: #333;
+    width: 60%;
+    font-weight: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+
+  * {
+    padding: 0;
+    margin: 0
+  }
+
+  .body-content {
+    text-align: center;
+    margin: auto;
+  }
+
+  div {
+    margin-top: 10px;
+  }
+
+
+  #div_ewm_p {
+    border: solid 5px;
+    padding: 4px;
+  }
+
+  #div_ewm_p.cx {
+    border-color: #0000FF !important;
+  }
+
+  #div_ewm_p.jx {
+    border-color: #4EB16E !important;
+  }
+
+  #div_yfx_button {
+    border: solid 5px red;
+    background: red;
+    width: 150px;
+    height: 43px;
+    font-size: 20px;
+  }
+
+  #div_yfx_button.already {
+    border: solid 5px #4EB16E;
+    background: #4EB16E;
+  }
+</style>
+<body class="blue-bg">
+<div class="content-box">
+    <div class="body-content" style="width: 260px">
+        <div id="div_bt" style="font-size: 20px"></div>
+        <div id="div_xm" style="font-weight: bold; font-size: 1rem;padding-top: 30px;"></div>
+        <div id="div_bm" style="font-weight: bold; font-size: 1rem;"></div>
+        <div id="div_timer" style="font-weight: bold; font-size: 1.5rem;"></div>
+        <div id="div_ewm_p">
+            <div id="div_ewm">
+            </div>
+        </div>
+
+        <!--<div id="div_timer_time"  style="font-weight: bold; font-size: 2.5rem;"></div>-->
+        <div id="div_yxsj" style="font-weight: bold; font-size: 1rem;color: red"></div>
+        <div id="div_zt" style="font-weight: bold; font-size: 1rem;">审核状态：审核通过</div>
+
+
+        <div id="div_yfx" style="font-weight: bold; font-size: 1rem; display: none">
+            <button id='div_yfx_button'><i>已进校</i>
+            </button>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    Date.prototype.format = function (fmt) {
+        var o = {
+            'M+': this.getMonth() + 1, //月份
+            'd+': this.getDate(), //日
+            'h+': this.getHours(), //小时
+            'm+': this.getMinutes(), //分
+            's+': this.getSeconds(), //秒
+            'q+': Math.floor((this.getMonth() + 3) / 3), //季度
+            S: this.getMilliseconds(), //毫秒
+        }
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(
+                RegExp.$1,
+                (this.getFullYear() + '').substr(4 - RegExp.$1.length),
+            )
+        }
+        for (var k in o) {
+            if (new RegExp('(' + k + ')').test(fmt)) {
+                fmt = fmt.replace(
+                    RegExp.$1,
+                    RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length),
+                )
+            }
+        }
+        return fmt
+    }
+
+    setInterval(() => {
+        document.getElementById('div_timer').innerText = new Date().format('MM-dd\t\t\thh:mm:ss')
+    }, 1000)
+
+
+    const params = new URLSearchParams(location.search)
+
+    let qrColor
+    if (params.get('isJx')) {
+        $('#div_yfx').show()
+        $('#div_bt').text('销假进校二维码')
+        $('#div_ewm_p').addClass('jx')
+        qrColor = '#4EB16E'
+    }
+    else {
+        $('#div_bt').text('请假出校二维码')
+        $('#div_ewm_p').addClass('cx')
+        qrColor = '#4e6ab1'
+    }
+
+    $('#div_xm').text(params.get('name') + ' ' + params.get('id'))
+    $('#div_bm').text(params.get('school'))
+
+    function createQrCode(text, color) {
+        new QRCode(document.getElementById('div_ewm'), {
+            text: text,
+            colorDark: color,
+            width: 240,
+            height: 240,
+        })
+    }
+
+    const url = 'https://nya.fish/rick#123456789012345678901234567890qwertyuiop'
+    $('#div_ewm').html(createQrCode(url, qrColor))
+
+    const date = new Date()
+    date.setMinutes(0)
+    date.setHours(date.getHours() - 1)
+    const startTime = date.format('yyyy-MM-dd hh:mm')
+    date.setHours(date.getHours() + 2)
+    const endTime = date.format('yyyy-MM-dd hh:mm')
+
+    $('#div_yxsj').html('有效时间：' + startTime + '至' + endTime)
+
+    $('#div_yfx_button').click(() => {
+        if (confirm('确定要进校吗？')) {
+            confirm('进校成功！')
+            $('#div_yfx_button').addClass('already').attr('disabled', 'disabled')
+        }
+    })
+</script>
+
+
+</body>
+</html>
+
