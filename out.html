@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset=utf-8>
-    <title>表单填写与审批::加载中</title>
-    <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta http-equiv=X-UA-Compatible content="IE=Edge">
-    <meta name=theme-color content=#039be5>
-    <meta name=format-detection content="telephone=no">
-    <style>@font-face {
+  <meta charset=utf-8>
+  <title>表单填写与审批::加载中</title>
+  <meta name="theme-color" content="#EDEDED" />
+  <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta http-equiv=X-UA-Compatible content="IE=Edge">
+  <meta name=theme-color content=#039be5>
+  <meta name=format-detection content="telephone=no">
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@500&display=swap");
+
+    @font-face {
       font-family: "icomoon";
       src: url(icon.ttf) format("truetype");
       font-weight: normal;
       font-style: normal
+    }
+
+    html,body {
+      overflow-x: hidden;
     }
 
     i {
@@ -51,7 +60,14 @@
       font-size: 16px
     }
 
-    body, div, p, h1, ul, li, table, img {
+    body,
+    div,
+    p,
+    h1,
+    ul,
+    li,
+    table,
+    img {
       margin: 0;
       padding: 0;
       border: none
@@ -97,7 +113,6 @@
     #header_holder {
       left: 0;
       right: 0;
-      position: fixed;
       z-index: 1;
       min-width: 310px
     }
@@ -193,7 +208,7 @@
     }
 
     #div_loader {
-      position: fixed;
+      position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
@@ -202,7 +217,7 @@
     }
 
     #help_content {
-      position: fixed;
+      position: absolute;
       z-index: 10001;
       cursor: pointer
     }
@@ -236,7 +251,8 @@
       -webkit-overflow-scrolling: touch
     }
 
-    @media screen and (-ms-high-contrast: active),(-ms-high-contrast: none) {
+    @media screen and (-ms-high-contrast: active),
+    (-ms-high-contrast: none) {
       div.infoplus_view_wrap_inner {
         top: 17px
       }
@@ -263,7 +279,7 @@
     }
 
     #renderContent_holder {
-      padding-top: 105px;
+      padding-top: 10px;
       background-color: #f3f3f3
     }
 
@@ -350,7 +366,7 @@
     }
 
     #nav_menu {
-      position: fixed;
+      position: absolute;
       height: 100%;
       width: 158px;
       left: 0;
@@ -550,214 +566,234 @@
 
     TD.xdTableContentCell {
       BACKGROUND-COLOR: #ffffff
-    }</style>
-    <style>.sf-hidden {
+    }
+  </style>
+  <style>
+    .sf-hidden {
       display: none !important
-    }</style>
-    <style>img[src="data:,"], source[src="data:,"] {
+    }
+  </style>
+  <style>
+    img[src="data:,"],
+    source[src="data:,"] {
       display: none !important
-    }</style>
+    }
+  </style>
 
-    <style>
-      #command_holder li.command_button {
-        height: 38px;
-      }
+  <style>
+    #command_holder li.command_button {
+      height: 38px;
+    }
 
-      #command_holder li.command_button {
-        height: 26px;
-        margin: 4px 2px 4px 6px;
-        float: left;
-        position: relative;
-        text-align: left;
-        list-style: none;
-      }
+    #command_holder li.command_button {
+      height: 26px;
+      margin: 4px 2px 4px 6px;
+      float: left;
+      position: relative;
+      text-align: left;
+      list-style: none;
+    }
 
-      #command_holder .command_button_content {
-        font-weight: bold;
-        min-width: 118px;
-        display: inline-block;
-        *display: inline;
-        padding: 3px 8px;
-        margin-bottom: 0;
-        *margin-left: .3em;
-        font-size: 14px;
-        line-height: 20px;
-        *line-height: 20px;
-        color: #009966;
-        text-align: center;
-        text-shadow: 0 1px 1px rgb(255 255 255 / 75%);
-        vertical-align: middle;
-        cursor: pointer;
-        background-color: #FFFFFF;
-        *background-color: #FFFFFF;
-        border: 1px solid #FFFFFF;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-        *zoom: 1;
-        -webkit-box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 1px 2px rgb(0 0 0 / 5%);
-        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-        box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
-        border-color: #c5c5c5;
-        border-color: rgba(0, 0, 0, 0.08) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.15);
-      }
+    #command_holder .command_button_content {
+      font-weight: bold;
+      min-width: 118px;
+      display: inline-block;
+      *display: inline;
+      padding: 3px 8px;
+      margin-bottom: 0;
+      *margin-left: .3em;
+      font-size: 14px;
+      line-height: 20px;
+      *line-height: 20px;
+      color: #009966;
+      text-align: center;
+      text-shadow: 0 1px 1px rgb(255 255 255 / 75%);
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #FFFFFF;
+      *background-color: #FFFFFF;
+      border: 1px solid #FFFFFF;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      *zoom: 1;
+      -webkit-box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 1px 2px rgb(0 0 0 / 5%);
+      -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+      border-color: #c5c5c5;
+      border-color: rgba(0, 0, 0, 0.08) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.15);
+    }
 
-      #command_holder .command_button_content {
-        width: 100px;
-        min-width: 100px;
-        padding: 3px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        line-height: 32px;
-      }
+    #command_holder .command_button_content {
+      width: 100px;
+      min-width: 100px;
+      padding: 3px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      line-height: 32px;
+    }
 
-      #command_holder li.command_button ~ li.command_button {
-        margin: 4px 2px;
-      }
+    #command_holder li.command_button~li.command_button {
+      margin: 4px 2px;
+    }
 
-      #command_holder .command_button_content.kill {
-        color: #00B0FF;
-      }
-    </style>
+    #command_holder .command_button_content.kill {
+      color: #00B0FF;
+    }
+  </style>
 </head>
+
 <body>
-<div id=help_content></div>
-<div id=div_loader style=display:none>
-
-</div>
-<div id=form_do_action_dialog style=display:none>
-
-
-</div>
-<div id=div_render_container style=display:block>
-    <form id=renderForm>
-        <div id=div_content class=div_content>
-            <div id=header_holder style=top:0px>
-                <div id=title_holder class=todo>
-                    <div id=title_icon class=title_icon><i class=i-icon-menu></i></div>
-                    <div id=title_content style=max-width:253px>
-                        <nobr class="title"></nobr>
-                    </div>
-                    <div>
-                        <div id=title_description>流水号:<span class="water"></span></div>
-                        <div id=title_description_short style=display:none>流水号:<span class="water"></span></div>
-                    </div>
-                </div>
-
-                <div id=command_holder>
-                    <div class="clear sf-hidden"></div>
-                    <div id=command_bar_title_icon class="title_icon todo" style=display:none></div>
-                    <ul id=form_command_bar>
-                        <li class="command_button jx" style="display: none"><a class="command_button_content">
-                            <nobr>上传核酸报告</nobr>
-                        </a></li>
-                        <li class="command_button kill jx" style="display: none"><a class="command_button_content kill"
-                                                                                    name="infoplus_action_2776_kill"
-                                                                                    id="infoplus_action_2776_kill">
-                            <nobr>终止</nobr>
-                        </a></li>
-                        <li class=no_action id="noAction" style="display: none">您无需任何操作</li>
-                        <li class=tool_button><a id=FormCommandMore class=tool_button href=#><i
-                            class=i-icon-more-vert></i></a>
-                    </ul>
-                </div>
-            </div>
-            <div id=renderContent_holder>
-                <div id=nav_menu style=display:none;top:94px></div>
-
-
-                <div id=render_holder>
-                    <div id=form_holder style=width:394px;display:block>
-                        <div class=infoplus_view_wrap_outer>
-                            <div class=infoplus_view_wrap_inner>
-                                <div id=infoplus_view_2450_0 class=infoplus_view>
-                                    <div align=center></div>
-                                    <div align=center></div>
-                                    <div align=center>
-                                        <table
-                                            style=BORDER-TOP-STYLE:none;WORD-WRAP:break-word;BORDER-LEFT-STYLE:none;WIDTH:360px;BORDER-COLLAPSE:collapse;TABLE-LAYOUT:fixed;BORDER-BOTTOM-STYLE:none;BORDER-RIGHT-STYLE:none
-                                            class=xdFormLayout>
-                                            <colgroup>
-                                                <col width=360 style=WIDTH:360px>
-                                            <tbody>
-                                            <tr class=xdTitleRow>
-                                                <td class=xdTitleCell
-                                                    style="BORDER-TOP:#000000 1pt;BORDER-RIGHT:#808080 6pt;VERTICAL-ALIGN:top;BORDER-BOTTOM:#808080 6pt;PADDING-BOTTOM:10px;PADDING-TOP:10px;PADDING-LEFT:10px;BORDER-LEFT:#808080 6pt;PADDING-RIGHT:10px;BACKGROUND-COLOR:#ffffff">
-                                                    <h1 align=left><img border=0 src="logo.png" id="logo"
-                                                                        style=HEIGHT:67px;WIDTH:223px></h1>
-                                            <tr class=xdTableContentRow>
-                                                <td class=xdTableContentCell
-                                                    style="BORDER-TOP:#808080 6pt;BORDER-RIGHT:#bfbfbf 1pt;VERTICAL-ALIGN:top;BORDER-BOTTOM:#bfbfbf 1pt;PADDING-BOTTOM:0px;PADDING-TOP:0px;PADDING-LEFT:0px;BORDER-LEFT:#bfbfbf 1pt;PADDING-RIGHT:0px">
-                                                    <div align=left>
-                                                        <table border=1 bordercolor=buttontext
-                                                               style="WORD-WRAP:break-word;BORDER-TOP:medium none;BORDER-RIGHT:medium none;WIDTH:358px;BORDER-COLLAPSE:collapse;TABLE-LAYOUT:fixed;BORDER-BOTTOM:medium none;BORDER-LEFT:medium none"
-                                                               class=xdLayout>
-                                                            <colgroup>
-                                                                <col width=358 style=WIDTH:358px>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td style="BORDER-TOP:#d8d8d8 1pt solid;BORDER-RIGHT:#d8d8d8 1pt solid;VERTICAL-ALIGN:middle;BORDER-BOTTOM:#d8d8d8 1pt solid;PADDING-BOTTOM:10px;PADDING-TOP:10px;PADDING-LEFT:10px;BORDER-LEFT:#d8d8d8 1pt solid;PADDING-RIGHT:10px;BACKGROUND-COLOR:#ffffff">
-                                                                    <div><font size=4><strong>
-                                                                        <div class=xdlabel></div>
-                                                                    </strong></font></div>
-                                                                    <font size=4><strong>
-                                                                        <div align=left>
-                                                                            <div
-                                                                                class="infoplus_iframeControlContainer infoplus_readonly"
-                                                                                id=iframe_1d6997c5-c2e3-4407-a82f-69d0157d63ce_Container>
-
-
-                                                                                <iframe scrolling=auto
-                                                                                        style=HEIGHT:600px;WIDTH:100%
-                                                                                        class="infoplus_control infoplus_iframeControl infoplus_readonly"
-                                                                                        title id="qrcode"></iframe>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </strong></font>
-                                                        </table>
-                                                    </div>
-                                        </table>
-                                    </div>
-                                    <div align=center></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id=variables_container></div>
-                    </div>
-                </div>
-
-                <div id=form_remark_holder class="form_remark_holder shadow round-corner" align=center
-                     style=width:394px;display:block>
-                    <ul>
-                        <li class=remark_item style=display:block;border-bottom:none>
-                            <div class=form_remark_title><span class=color_b2><span class=color_o1><b>您(<span
-                                id="name"></span>)</b></span> 正在填写/办理<b
-                                id="banli"></b></span>
-                            </div>
-                    </ul>
-                </div>
-            </div>
+  <div style="position: sticky; z-index: 233;top: 0; left: 0; right: 0;">
+    <div id="wxhead"
+      style="position: relative;height: 60px; background-color: #EDEDED; display: flex; align-items: flex-end;">
+      <img src="/maimai-xck/assets/wechat-close.png" style="flex-shrink: 0; height: 100px;">
+      <div style="flex-grow: 1;"></div>
+      <img src="/maimai-xck/assets/wechat-menu.png" style="flex-shrink: 0; height: 100px;">
+      <p id="wxtitle"
+        style="position: absolute; bottom: 0; left: 0; right: 0; text-align: center; font-size: 1.1rem; line-height: 1.1em; 
+    margin: 1em auto; padding: revert; color: unset; font-family: Noto Sans SC; max-width: 60vw; overflow: hidden; text-overflow: ellipsis; white-space: pre;">
+        表单填写与审批::加载中
+      </p>
+    </div>
+    <div id=header_holder style=top:0px>
+      <div id=title_holder class=todo>
+        <div id=title_icon class=title_icon><i class=i-icon-menu></i></div>
+        <div id=title_content style=max-width:253px>
+          <nobr class="title"></nobr>
         </div>
+        <div>
+          <div id=title_description>流水号:<span class="water"></span></div>
+          <div id=title_description_short style=display:none>流水号:<span class="water"></span></div>
+        </div>
+      </div>
+      <div id=command_holder>
+        <div class="clear sf-hidden"></div>
+        <div id=command_bar_title_icon class="title_icon todo" style=display:none></div>
+        <ul id=form_command_bar>
+          <li class="command_button jx" style="display: none"><a class="command_button_content">
+              <nobr>上传核酸报告</nobr>
+            </a></li>
+          <li class="command_button kill jx" style="display: none"><a class="command_button_content kill"
+              name="infoplus_action_2776_kill" id="infoplus_action_2776_kill">
+              <nobr>终止</nobr>
+            </a></li>
+          <li class=no_action id="noAction" style="display: none">您无需任何操作</li>
+          <li class=tool_button><a id=FormCommandMore class=tool_button href=#><i class=i-icon-more-vert></i></a>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id=div_render_container style=display:block>
+    <form id=renderForm>
+      <div id=div_content class=div_content>
+
+        <div id=renderContent_holder>
+          <div id=nav_menu style=display:none;top:94px></div>
+
+
+          <div id=render_holder>
+            <div id=form_holder style=width:394px;display:block>
+              <div class=infoplus_view_wrap_outer>
+                <div class=infoplus_view_wrap_inner>
+                  <div id=infoplus_view_2450_0 class=infoplus_view>
+                    <div align=center></div>
+                    <div align=center></div>
+                    <div align=center>
+                      <table
+                        style=BORDER-TOP-STYLE:none;WORD-WRAP:break-word;BORDER-LEFT-STYLE:none;WIDTH:360px;BORDER-COLLAPSE:collapse;TABLE-LAYOUT:fixed;BORDER-BOTTOM-STYLE:none;BORDER-RIGHT-STYLE:none
+                        class=xdFormLayout>
+                        <colgroup>
+                          <col width=360 style=WIDTH:360px>
+                        <tbody>
+                          <tr class=xdTitleRow>
+                            <td class=xdTitleCell
+                              style="BORDER-TOP:#000000 1pt;BORDER-RIGHT:#808080 6pt;VERTICAL-ALIGN:top;BORDER-BOTTOM:#808080 6pt;PADDING-BOTTOM:10px;PADDING-TOP:10px;PADDING-LEFT:10px;BORDER-LEFT:#808080 6pt;PADDING-RIGHT:10px;BACKGROUND-COLOR:#ffffff">
+                              <h1 align=left><img border=0 src="logo.png" id="logo" style=HEIGHT:67px;WIDTH:223px>
+                              </h1>
+                          <tr class=xdTableContentRow>
+                            <td class=xdTableContentCell
+                              style="BORDER-TOP:#808080 6pt;BORDER-RIGHT:#bfbfbf 1pt;VERTICAL-ALIGN:top;BORDER-BOTTOM:#bfbfbf 1pt;PADDING-BOTTOM:0px;PADDING-TOP:0px;PADDING-LEFT:0px;BORDER-LEFT:#bfbfbf 1pt;PADDING-RIGHT:0px">
+                              <div align=left>
+                                <table border=1 bordercolor=buttontext
+                                  style="WORD-WRAP:break-word;BORDER-TOP:medium none;BORDER-RIGHT:medium none;WIDTH:358px;BORDER-COLLAPSE:collapse;TABLE-LAYOUT:fixed;BORDER-BOTTOM:medium none;BORDER-LEFT:medium none"
+                                  class=xdLayout>
+                                  <colgroup>
+                                    <col width=358 style=WIDTH:358px>
+                                  <tbody>
+                                    <tr>
+                                      <td
+                                        style="BORDER-TOP:#d8d8d8 1pt solid;BORDER-RIGHT:#d8d8d8 1pt solid;VERTICAL-ALIGN:middle;BORDER-BOTTOM:#d8d8d8 1pt solid;PADDING-BOTTOM:10px;PADDING-TOP:10px;PADDING-LEFT:10px;BORDER-LEFT:#d8d8d8 1pt solid;PADDING-RIGHT:10px;BACKGROUND-COLOR:#ffffff">
+                                        <div>
+                                          <font size=4><strong>
+                                              <div class=xdlabel></div>
+                                            </strong></font>
+                                        </div>
+                                        <font size=4><strong>
+                                            <div align=left>
+                                              <div class="infoplus_iframeControlContainer infoplus_readonly"
+                                                id=iframe_1d6997c5-c2e3-4407-a82f-69d0157d63ce_Container>
+
+
+                                                <iframe scrolling=auto style=HEIGHT:600px;WIDTH:100%
+                                                  class="infoplus_control infoplus_iframeControl infoplus_readonly"
+                                                  title id="qrcode"></iframe>
+
+                                              </div>
+                                            </div>
+                                          </strong></font>
+                                </table>
+                              </div>
+                      </table>
+                    </div>
+                    <div align=center></div>
+                  </div>
+                </div>
+              </div>
+              <div id=variables_container></div>
+            </div>
+          </div>
+
+          <div id=form_remark_holder class="form_remark_holder shadow round-corner" align=center
+            style=width:394px;display:block>
+            <ul>
+              <li class=remark_item style=display:block;border-bottom:none>
+                <div class=form_remark_title><span class=color_b2><span class=color_o1><b>您(<span
+                          id="name"></span>)</b></span> 正在填写/办理<b id="banli"></b></span>
+                </div>
+            </ul>
+          </div>
+        </div>
+      </div>
     </form>
     <div id=master_footer>
-        <div id=div_footer_copy_containers>
-            <div style=height:1px;background-color:#999999></div>
-            <div style=height:1px;background-color:#FFFFFF></div>
-            <div id=div_footer_copy_content><span class=copyright>©</span> 2009 - 2021. 南京信息工程大学(nuist.edu.cn), All
-                rights reserved. Version 20211117-095344
-            </div>
+      <div id=div_footer_copy_containers>
+        <div style=height:1px;background-color:#999999></div>
+        <div style=height:1px;background-color:#FFFFFF></div>
+        <div id=div_footer_copy_content><span class=copyright>©</span> 2009 - 2021. 南京信息工程大学(nuist.edu.cn), All
+          rights reserved. Version 20211117-095344
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
 
-<script src="https://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
-<script>
+  <script src="https://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="/maimai-xck/common/requireParams.js"></script>
+  <script>
     function getRandomIntInclusive(min, max) {
-        min = Math.ceil(min)
-        max = Math.floor(max)
-        return Math.floor(Math.random() * (max - min + 1)) + min //含最大值，含最小值
+      min = Math.ceil(min)
+      max = Math.floor(max)
+      return Math.floor(Math.random() * (max - min + 1)) + min //含最大值，含最小值
+    }
+
+    function setTitle(title) {
+      document.title = title
+      $('#wxtitle').text(title)
+    }
+
+    if (navigator.userAgent.toLowerCase().includes('micromessenger')) {
+      $('#wxhead').hide()
     }
 
     const params = new URLSearchParams(location.search)
@@ -768,16 +804,16 @@
     $('.water').text(getRandomIntInclusive(2333333, 2666666))
     $('#name').text(params.get('name'))
     if (isJx) {
-        $('.title').text('查看销假二维码:查看进校二维码')
-        $('#banli').text('查看进校二维码')
-        $('.jx').show()
-        document.title = '查看进校二维码 - 查看销假二维码'
-        $('#logo').attr('style', 'HEIGHT: 57px; WIDTH: 221px')
+      $('.title').text('查看销假二维码:查看进校二维码')
+      $('#banli').text('查看进校二维码')
+      $('.jx').show()
+      setTitle('查看进校二维码 - 查看销假二维码')
+      $('#logo').attr('style', 'HEIGHT: 57px; WIDTH: 221px')
     }
     else {
-        $('.title').text('查看出校二维码:查看出校二维码')
-        $('#banli').text('查看出校二维码')
-        $('#noAction').show()
-        document.title = '查看出校二维码 - 查看出校二维码'
+      $('.title').text('查看出校二维码:查看出校二维码')
+      $('#banli').text('查看出校二维码')
+      $('#noAction').show()
+      setTitle('查看出校二维码 - 查看出校二维码')
     }
-</script>
+  </script>
