@@ -8,6 +8,10 @@
       html {
         background-color: #e0e0e0;
         min-height: 100vh;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+          "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
       }
       .container {
         display: flex;
@@ -16,12 +20,13 @@
         gap: 0.5rem;
       }
       input {
-        margin-left: 4px;
+        font-size: 1rem;
+        margin-left: 8px;
         padding: 8px;
         border: none;
         border-radius: 7px;
         background: #e0e0e0;
-        box-shadow: inset 5px 5px 13px #cecece, inset -5px -5px 13px #f2f2f2;
+        box-shadow: 5px 5px 13px #cecece, -5px -5px 13px #f2f2f2;
         transition: all 0.2s ease-in-out;
       }
       input:focus-visible {
@@ -29,8 +34,7 @@
         padding-bottom: 12px;
         outline: none;
         border-radius: 7px;
-        background: linear-gradient(145deg, #cacaca, #f0f0f0);
-        box-shadow: 5px 5px 13px #cecece, -5px -5px 13px #f2f2f2;
+        box-shadow: inset 5px 5px 13px #cecece, inset -5px -5px 13px #f1f1f1;
       }
       img {
         max-width: 100vw;
@@ -47,17 +51,22 @@
         <label>学号<input id="code" /></label>
         <label>学院<input id="college" /></label>
       </form>
-      <p><a id="out" target="_blank" /></p>
+      <p><a id="out" target="_blank"></a></p>
       <!--不用 in 是因为这玩意儿是关键字-->
-      <p><a id="jx" target="_blank" /></p>
+      <p><a id="jx" target="_blank"></a></p>
     </div>
     <script>
+      const [myName, code, college, out, jx] = [
+        "myName",
+        "code",
+        "college",
+        "out",
+        "jx",
+      ].map((id) => document.getElementById(id));
       const changeState = () => {
-        const [nameValue, idValue, collegeValue] = [
-          encodeURIComponent(myName.value),
-          encodeURIComponent(code.value),
-          encodeURIComponent(college.value),
-        ];
+        const [nameValue, idValue, collegeValue] = [myName, code, college].map(
+          (ele) => encodeURIComponent(ele.value)
+        );
         localStorage.setItem(
           "goout-state",
           JSON.stringify([myName.value, code.value, college.value])
